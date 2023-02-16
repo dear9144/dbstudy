@@ -1,0 +1,42 @@
+/*
+    뷰(View)
+    1. 테이블이나 뷰를 이용해서 만들어 낸 가상 테이블이다.
+    2. 쿼리문 자체를 저장하고 있다.
+    3. 자주 사용하는 복잡한 쿼리문이 있다면 뷰로 만들어 두고 편하게 호출한다.
+    4. 뷰로 인한 성능상의 이점은 없다.
+*/
+
+-- 뷰 만들기
+CREATE VIEW VIEW_EMP
+    AS (SELECT E.EMP_NO, E.NAME, E.DEPART, D.DEPT_NAME,  D.LOCATION, E.GENDER, E.POSITION, E.HIRE_DATE, E.SALARY
+          FROM DEPARTMENT_TBL D INNER JOIN EMPLOYEE_TBL E
+            ON D.DEPT_NO = E.DEPART);
+
+-- 뷰 조회하기
+SELECT EMP_NO, NAME, DEPT_NAME, LOCATION
+  FROM VIEW_EMP
+ WHERE DEPART = 1;
+
+-- 뷰 삭제하기
+DROP VIEW VIEW_EMP;
+
+
+
+DECLARE
+    EMP_ID EMPLOYEES.EMPLOYEE_ID%TYPE;
+    TYPE NAME_TYPE IS RECORD(
+        FNAME EMPLOYEES.FIRST_NAME%TYPE,
+        LNAME EMPLOYEES.LAST_NAME%TUPE
+        );
+        FULL_NAME NAME_TYPE;
+BEGIN
+    EMP_ID := 100;
+    WHLIE EMP)ID <= 206 LOOP
+    SELECT FIRST_NAME, LOAST_NAME 
+    INTO FULL_NAME
+    FROM EMPLOYEES
+    WHERE EMPLOYEE_ID = EMP_ID;
+    DBMS_OUTPUT.PUT_LINE(FULL_NAME.FNAME || ' ' || FULL_NAME.LNAME);
+    EMP_ID := EMP_ID +1;
+    END LOOP;
+END;
